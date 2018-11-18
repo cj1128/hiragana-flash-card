@@ -1,0 +1,164 @@
+body {
+  font-size: 16px;
+  margin: 0;
+  font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+@keyframes shake {
+  from,
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translate3d(10px, 0, 0);
+  }
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+}
+
+.app__footer {
+  box-sizing: border-box;
+  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+}
+
+.app__footer > div:nth-child(2) {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.app__main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-auto-rows: 1fr;
+}
+
+.app__item {
+  display: flex;
+  align-items: center;
+}
+
+.app__group {
+  width: 50px;
+  height: 50px;
+  margin: auto;
+  border: solid 2px #ebebeb;
+  border-radius: 50%;
+  box-sizing: content-box;
+  display: flex;
+  align-items: center;
+}
+
+.app__group--active {
+  /*border-color: #d52122;*/
+  border-color: #34ab4e;
+}
+
+.app__group > span:first-child {
+  margin-left: auto;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.app__group > span:last-child {
+  margin-right: auto;
+  color: #888;
+}
+
+.card {
+
+}
+
+.card__top__content {
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.card__top__content > img {
+  width: 18px;
+}
+
+.card__top__content > span {
+  margin-left: 20px;
+  margin-right: 20px;
+  flex: 1;
+  text-align: center;
+}
+
+.card__top__progress {
+  height: 2px;
+  width: 100%;
+}
+
+.card__progress-wrapper {
+  background-color: #ebebeb;
+}
+
+.card__progress-inner {
+  height: 2px;
+  transition: all .3s linear;
+  background-color: #34ab4e;
+}
+
+.card__question {
+  padding: 30px 0;
+  text-align: center;
+}
+
+.card__question > span {
+  font-size: 5rem;
+  font-weight: bold;
+}
+
+.card__question > div {
+  font-size: 0.8rem;
+  margin-top: -10px;
+  color: #666;
+}
+
+.card__answers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-row-gap: 20px;
+}
+
+.card__answer {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: solid 2px #eee;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-size: 3rem;
+}
+
+.card__answer--wrong {
+  animation: shake 0.5s 1;
+  border-color: #d52122;
+}
+
+.card__answer--correct {
+  border-color: #34ab4e;
+}

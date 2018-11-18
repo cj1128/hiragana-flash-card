@@ -4,14 +4,92 @@
   <title>50音记忆卡片</title>
   <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
   <link rel="stylesheet" type="text/css" href="bulma.min.css">
+  <link rel="stylesheet" type="text/css" href="main.css">
   <script type="text/javascript" src="vue.min.js"></script>
+  <script type="text/javascript" src="howler.core.min.js"></script>
+  <script type="text/javascript" src="lodash.min.js"></script>
+  <script type="text/javascript" src="sweetalert.min.js"></script>
 </head>
 <body>
-  <script type="text/x-templte">
+  <script type="text/x-templte" id="card">
+    <div class="card">
+      <div class="card__top">
+        <div class="card__top__content">
+          <img src="cross.svg" @click="onCancel"/>
 
+          <span>本次复习 {{ duration.text }}</span>
+        </div>
+
+        <div class="card__progress-wrapper">
+          <div class="card__progress-inner" :style="{'width': progressWidth}">
+          </div>
+        </div>
+      </div>
+
+      <div class="card__main">
+        <div class="card__question">
+          <span>{{ practice.question }}</span>
+          <div>{{ practice.desc }}</div>
+        </div>
+
+        <div class="card__answers">
+          <div
+            class="card__answer"
+            v-for="answer, idx in practice.answers"
+            ref="answer"
+            @click="onSelect(idx)"
+          >
+            {{ answer }}
+          </div>
+        </div>
+      </div>
+    </div>
   </script>
 
   <div id="app" v-cloak>
+    <card
+      v-if="started"
+      :duration="duration"
+      :indexes="groupIndexes"
+      @cancel="started = false"
+    >
+    </card>
+
+    <template v-else>
+      <div class="app__main">
+        <div
+          class="app__item"
+          v-for="g, i in GROUPS"
+          @click="toggleSelect(i)"
+        >
+          <div class="app__group" :class="groupIndexes.indexOf(i) !== -1 ? 'app__group--active' : ''">
+            <span>{{ g.group }}</span>
+            <span>行</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="app__footer">
+        <div class="select">
+          <select v-model="duration">
+            <option v-for="d in DURATIONS" :value="d">{{ d.text }}</option>
+          </select>
+        </div>
+
+        <div @click="toggleSelectAll">
+          <input type="checkbox" :checked="allSelected"></input>
+          全选
+        </div>
+
+        <button
+          class="button is-text"
+          :disabled="groupIndexes.length === 0"
+          @click="started = true"
+        >
+          开始
+        </button>
+      </div>
+    </template>
   </div>
 
   <script type="text/javascript" src="main.js"></script>
