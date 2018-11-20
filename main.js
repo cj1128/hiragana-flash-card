@@ -125,11 +125,11 @@ const DURATIONS = [
 ]
 
 const successSound = new Howl({
-  src: ["success.wav"],
+  src: ["success.mp3"],
 })
 
 const errorSound = new Howl({
-  src: ["error.wav"],
+  src: ["error.mp3"],
 })
 
 Vue.component("card", {
