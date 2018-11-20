@@ -132,6 +132,32 @@ const errorSound = new Howl({
   src: ["error.mp3"],
 })
 
+// 是否以 PWA 模式运行
+const runningAsPWA = () => window.matchMedia('(display-mode: standalone)').matches
+
+// 是否含有 home indicator
+const hasHomeIndicator = () => {
+  if(!navigator.userAgent.match(/iPhone/i)) return false
+
+  const h = window.screen.height
+  const w = window.screen.width
+
+  return (w === 414 && h === 896) || // XMAX, XR
+    (w === 375 && h === 812) // X, XS
+}
+
+// fix safari 100vh problem
+Vue.directive("full-height", el => {
+  let height = window.innerHeight
+
+  // 减去底部的 Home Indicator
+  if(runningAsPWA() && hasHomeIndicator()) {
+    height -= 32
+  }
+
+  el.style.height = height + "px"
+})
+
 Vue.component("card", {
   template: "#card",
 
@@ -165,7 +191,6 @@ Vue.component("card", {
   },
 
   mounted() {
-    this.$el.style.height = window.innerHeight + "px"
     this.start()
   },
 
@@ -352,11 +377,6 @@ new Vue({
     },
   },
 
-  mounted() {
-    // fix safari 100vh problem
-    this.$el.style.height = window.innerHeight + "px"
-  },
-
   methods: {
     toggleSelect(idx) {
       const i = this.groupIndexes.indexOf(idx)
@@ -373,7 +393,6 @@ new Vue({
         this.groupIndexes = []
       } else {
         this.groupIndexes = _.range(this.GROUPS.length)
-        console.log(this.groupIndexes, this.allSelected)
       }
     },
   },

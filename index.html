@@ -36,7 +36,7 @@
 </head>
 <body>
   <script type="text/x-templte" id="card">
-    <div class="card">
+    <div class="card" v-full-height>
       <div class="card__top">
         <div class="card__top__content">
           <img src="cross.svg" @click="onCancel"/>
@@ -70,7 +70,7 @@
     </div>
   </script>
 
-  <div id="app" v-cloak>
+  <div id="app" v-cloak v-full-height>
     <card
       v-if="started"
       :duration="duration"
