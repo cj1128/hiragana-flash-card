@@ -10,12 +10,29 @@
   <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="theme-color" content="#ffffff">
-  <link rel="stylesheet" type="text/css" href="bulma.min.css">
+  <link rel="stylesheet" type="text/css" href="vendor/bulma.min.css">
   <link rel="stylesheet" type="text/css" href="main.css">
-  <script type="text/javascript" src="vue.min.js"></script>
-  <script type="text/javascript" src="howler.core.min.js"></script>
-  <script type="text/javascript" src="lodash.min.js"></script>
-  <script type="text/javascript" src="sweetalert.min.js"></script>
+  <script type="text/javascript" src="vendor/vue.min.js"></script>
+  <script type="text/javascript" src="vendor/howler.core.min.js"></script>
+  <script type="text/javascript" src="vendor/lodash.min.js"></script>
+  <script type="text/javascript" src="vendor/sweetalert.min.js"></script>
+  <script src="vendor/upup.min.js"></script>
+  <script>
+    UpUp.start({
+      "content-url": "index.html", // show this page to offline users
+      // Save the following files to cache as well
+      "assets": [
+        "vendor/bulma.min.css",
+        "main.css",
+        "vendor/vue.min.js",
+        "vendor/howler.core.min.js",
+        "vendor/lodash.min.js",
+        "vendor/sweetalert.min.js",
+        "success.mp3",
+        "error.mp3",
+      ],
+    });
+  </script>
 </head>
 <body>
   <script type="text/x-templte" id="card">
