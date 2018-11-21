@@ -147,15 +147,17 @@ const hasHomeIndicator = () => {
 }
 
 // fix safari 100vh problem
-Vue.directive("full-height", el => {
-  let height = window.innerHeight
+Vue.directive("full-height", {
+  bind: el => {
+    let height = window.innerHeight
 
-  // 减去底部的 Home Indicator
-  if(runningAsPWA() && hasHomeIndicator()) {
-    height -= 32
-  }
+    // 减去底部的 Home Indicator
+    if(runningAsPWA() && hasHomeIndicator()) {
+      height -= 32
+    }
 
-  el.style.height = height + "px"
+    el.style.height = height + "px"
+  },
 })
 
 Vue.component("card", {
@@ -378,6 +380,11 @@ new Vue({
   },
 
   methods: {
+    onStart() {
+      if(this.groupIndexes.length === 0) return
+      this.started = true
+    },
+
     toggleSelect(idx) {
       const i = this.groupIndexes.indexOf(idx)
 

@@ -10,7 +10,7 @@
   <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="theme-color" content="#ffffff">
-  <link rel="stylesheet" type="text/css" href="vendor/bulma.min.css">
+  <!-- <link rel="stylesheet" type="text/css" href="vendor/bulma.min.css"> -->
   <link rel="stylesheet" type="text/css" href="main.css">
   <script type="text/javascript" src="vendor/vue.min.js"></script>
   <script type="text/javascript" src="vendor/howler.core.min.js"></script>
@@ -94,24 +94,27 @@
       </div>
 
       <div class="app__footer">
-        <div class="select">
-          <select v-model="duration">
+        <div class="app__footer__item">
+          <select v-model="duration" class="app__footer__select">
             <option v-for="d in DURATIONS" :value="d">{{ d.text }}</option>
           </select>
         </div>
 
-        <div @click="toggleSelectAll">
-          <input type="checkbox" :checked="allSelected"></input>
+        <div
+          @click="toggleSelectAll"
+          class="app__footer__item"
+          :class="allSelected ? '' : 'app__footer--disabled'"
+        >
           全选
         </div>
 
-        <button
-          class="button is-text"
-          :disabled="groupIndexes.length === 0"
-          @click="started = true"
+        <div
+          @click="onStart"
+          class="app__footer__item"
+          :class="groupIndexes.length === 0 ? 'app__footer--disabled' : ''"
         >
           开始
-        </button>
+        </div>
       </div>
     </template>
   </div>
